@@ -2,10 +2,11 @@
     <ul>
     {% for day in all_days_list %}
         <li>{{ day.day_date }} {{ day.day_name }}</li>
-        <a href="/zeitplan/{{ day.id }}/">{{ "Click for details" }}</a>
+        <a href="/zeitplan/{{ day.id }}/">{{ "Wähle diesen Tag aus." }}</a>
         <br></br>
     {% endfor %}
     </ul>
 {% else %}
     <p>No days are available.</p>
 {% endif %}
+<a href="/zeitplan/">{{ "Zurück zum Start." }}</a>
