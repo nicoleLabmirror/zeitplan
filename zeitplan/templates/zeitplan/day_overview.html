@@ -1,0 +1,10 @@
+{% if time_entry_list %}
+    <ul>
+    {% for entry in time_entry_list %}
+        <li>{{ entry.entry_text }} {{ entry.passed }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Aktuell keine Einträge vorhanden</p>
+{% endif %}
+<a href="/zeitplan/overview/">{{ "Zurück zur Übersicht." }}</a>
