@@ -4,7 +4,9 @@ from .models import Day
 
 
 def index(request):
-    return HttpResponse('Hallo, das ist der aktuelle Prototyp der App "Zeitplan".')
+    text = 'Hallo, das ist der aktuelle Prototyp der App "Zeitplan ... in progress"'
+    context = {"text": text}
+    return render(request, "zeitplan/index.html", context)
 
 def overview(request):
     all_days_list = Day.objects.all().order_by("day_date")
@@ -13,14 +15,6 @@ def overview(request):
 
 def day_overview(request, day_id):
     model = Day
-    d = Day.objects.get(pk=day_id)
-    response = f"Tag: {d.day_name}. Datum: {d.day_date}."
-    return HttpResponse(response)
-
-def day_time_entries(request, day_id):
-    model = Day
-    time_entry_list = list(
-        Day.objects.get(pk=day_id).time_entry_set.all().values_list("entry_text")
-    )
-    response = f"Das sind Tätigkeiten: {time_entry_list}"
-    return HttpResponse(response)
+    time_entry_list = Day.objects.get(pk=day_id).time_entry_set.all()
+    context = {"time_entry_list": time_entry_list}
+    return render(request, "zeitplan/day_overview.html", context)
