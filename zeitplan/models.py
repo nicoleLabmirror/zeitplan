@@ -16,6 +16,7 @@ class Time_entry(models.Model):
     day = models.ForeignKey(Day, on_delete=models.CASCADE)
     entry_text = models.CharField(max_length=100)
     entry_passed = models.BooleanField(null=True, default=None)
+    votes = models.IntegerField(default=0)
 
     def __str__(self):
         return f"Tätigkeit: {self.entry_text}"
