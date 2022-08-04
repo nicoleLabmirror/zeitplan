@@ -1,7 +1,7 @@
 {% if all_days_list %}
     <ul>
     {% for day in all_days_list %}
-        <li>{{ day.day_date }} {{ day.day_name }}</li>
+        <li>{{ day.different_day_date }} {{ day.day_name }}</li>
         <a href="/zeitplan/{{ day.id }}/">{{ "Wähle diesen Tag aus." }}</a>
         <br></br>
     {% endfor %}

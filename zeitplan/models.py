@@ -11,6 +11,11 @@ class Day(models.Model):
         day_name_german = german_translation_for_day_name[day_name_english]
         return day_name_german
 
+    @property
+    def different_day_date(self):
+        diff_day_date = self.day_date.strftime("%d"".""%m"".""%Y")
+        return diff_day_date
+
     def __str__(self):
         return f"Datum: {self.day_date}"
 
