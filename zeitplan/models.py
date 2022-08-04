@@ -1,5 +1,5 @@
 from django.db import models
-from own_modules import german_translation_for_day_name
+from .own_modules import german_translation_for_day_name
 
 
 class Day(models.Model):
