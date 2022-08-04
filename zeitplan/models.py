@@ -1,4 +1,5 @@
 from django.db import models
+from own_modules import german_translation_for_day_name
 
 
 class Day(models.Model):
@@ -6,7 +7,9 @@ class Day(models.Model):
 
     @property
     def day_name(self):
-        return self.day_date.strftime("%A")
+        day_name_english = self.day_date.strftime("%A")
+        day_name_german = german_translation_for_day_name[day_name_english]
+        return day_name_german
 
     def __str__(self):
         return f"Datum: {self.day_date}"
