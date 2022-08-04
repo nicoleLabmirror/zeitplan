@@ -1,10 +1,13 @@
 {% if time_entry_list %}
     <ul>
     {% for entry in time_entry_list %}
-        <li>{{ entry.entry_text }} {{ entry.passed }}</li>
+        <li>{{ "Tätigkeit: " }} {{ entry.entry_text }}</li>
+        <li>{{ "Aktuelle Stimmenanzahl: "}} {{ entry.votes }}</li>
     {% endfor %}
     </ul>
 {% else %}
     <p>Aktuell keine Einträge vorhanden</p>
 {% endif %}
 <a href="/zeitplan/overview/">{{ "Zurück zur Übersicht." }}</a>
+<br></br>
+<a href="/zeitplan/">{{ "Zurück zum Start." }}</a>
