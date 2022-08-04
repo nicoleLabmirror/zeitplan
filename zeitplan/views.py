@@ -14,7 +14,6 @@ def overview(request):
     return render(request, "zeitplan/overview.html", context)
 
 def day_overview(request, day_id):
-    model = Day
     time_entry_list = Day.objects.get(pk=day_id).time_entry_set.all()
     context = {"time_entry_list": time_entry_list}
     return render(request, "zeitplan/day_overview.html", context)
