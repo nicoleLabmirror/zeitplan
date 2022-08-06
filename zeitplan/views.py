@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Day
+from .models import Day, Time_entry
 
 
 def index(request):
@@ -14,6 +14,10 @@ def overview(request):
     return render(request, "zeitplan/overview.html", context)
 
 def day_overview(request, day_id):
-    time_entry_list = Day.objects.get(pk=day_id).time_entry_set.all()
+    time_entry_list = Time_entry.objects.filter(
+        day=day_id
+    ).values(
+        "entry_text", "entry_category__category_text"
+    )
     context = {"time_entry_list": time_entry_list}
     return render(request, "zeitplan/day_overview.html", context)
