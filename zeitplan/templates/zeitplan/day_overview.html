@@ -2,7 +2,9 @@
     <ul>
     {% for entry in time_entry_list %}
         <li>{{ "Tätigkeit: " }} {{ entry.entry_text }}</li>
+        <li>{{ "Kategorie: "}} {{ entry.entry_category__category_text }}</li>
         <li>{{ "Aktuelle Stimmenanzahl: "}} {{ entry.votes }}</li>
+        <br></br>
     {% endfor %}
     </ul>
 {% else %}
