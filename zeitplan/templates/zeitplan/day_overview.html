@@ -10,6 +10,6 @@
 {% else %}
     <p>Aktuell keine Einträge vorhanden</p>
 {% endif %}
-<a href="/zeitplan/overview/">{{ "Zurück zur Übersicht." }}</a>
+<a href="{% url 'zeitplan:overview' %}">{{ "Zurück zur Übersicht." }}</a>
 <br></br>
-<a href="/zeitplan/">{{ "Zurück zum Start." }}</a>
+<a href="{% url 'zeitplan:index' %}">{{ "Zurück zum Start." }}</a>
