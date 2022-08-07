@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from .models import Day, Time_entry
 
 
@@ -17,7 +18,44 @@ def day_overview(request, day_id):
     time_entry_list = Time_entry.objects.filter(
         day=day_id
     ).values(
-        "entry_text", "entry_category__category_text"
+        "entry_text", "entry_category__category_text", "votes"
     )
-    context = {"time_entry_list": time_entry_list}
+    context = {
+        "time_entry_list": time_entry_list,
+        "day_id": day_id
+    }
     return render(request, "zeitplan/day_overview.html", context)
+
+def day_edit(request, day_id):
+    time_entry_list = Time_entry.objects.filter(
+        day=day_id
+    ).values(
+        "id", "entry_text", "entry_category__category_text", "votes"
+    )
+    day = Day.objects.get(pk=day_id)
+    context = {
+        "time_entry_list": time_entry_list,
+        "day_id": day_id,
+        "day_name": day.day_name,
+    }
+    return render(request, "zeitplan/day_editing.html", context)
+
+def day_votes(request, day_id):
+    day = Day.objects.get(pk=day_id)
+    try:
+        entries = day.time_entry_set.get(pk=request.POST["entry"])
+    except (KeyError, Day.DoesNotExist):
+        context = {
+            "day_id": day_id,
+            "error message": "Uh oh ... fuck you."
+        }
+        return render(request, "zeitplan/day_editing.html", context)
+    else:
+        entries.votes += 1
+        entries.save()
+        return HttpResponseRedirect(
+            reverse(
+                "zeitplan:day_overview",
+                args=(day_id,)
+            )
+        )
