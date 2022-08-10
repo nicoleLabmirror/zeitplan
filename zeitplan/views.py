@@ -43,7 +43,7 @@ def day_votes(request, day_id):
     except (KeyError, Day.DoesNotExist):
         context = {
             "day_id": day_id,
-            "error message": "Uh oh ... fuck you."
+            "error message": "Why?"
         }
         return render(request, "zeitplan/day_editing.html", context)
     else:
