@@ -1,7 +1,7 @@
-<form action="{% url 'zeitplan:day_votes' day_id %}" method="post">
+<form action="{% url 'zeitplan:day_votes' day.id %}" method="post">
 {% csrf_token %}
 <fieldset>
-    <legend><h1>{{ day_name }}</h1></legend>
+    <legend><h1>{{ day.day_name }}</h1></legend>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% for entry in time_entry_list %}
         <input type="radio" name="entry" id="entry{{ forloop.counter }}" value="{{ entry.id }}">
@@ -10,7 +10,7 @@
     {% endfor %}
 </fieldset>
 </form>
-<a href="{% url 'zeitplan:day_overview' day_id %}">{{ "Zurück zur Tagesübersicht." }}</a>
+<a href="{% url 'zeitplan:day_overview' day.id %}">{{ "Zurück zur Tagesübersicht." }}</a>
 <br></br>
 <a href="{% url 'zeitplan:overview' %}">{{ "Zurück zur Übersicht aller Tage." }}</a>
 <br></br>
