@@ -17,8 +17,6 @@ def overview(request):
 def day_overview(request, day_id):
     time_entry_list = Time_entry.objects.filter(
         day=day_id
-    ).values(
-        "entry_text", "entry_category__category_text", "votes"
     )
     context = {
         "time_entry_list": time_entry_list,
@@ -29,8 +27,6 @@ def day_overview(request, day_id):
 def day_edit(request, day_id):
     time_entry_list = Time_entry.objects.filter(
         day=day_id
-    ).values(
-        "id", "entry_text", "entry_category__category_text", "votes"
     )
     day = Day.objects.get(pk=day_id)
     context = {
