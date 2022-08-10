@@ -1,6 +1,6 @@
 {% if time_entry_list %}
     <ul>
-    <legend><h1>{{ day.day_name }}</h1></legend>
+    <h1>{{ day.day_name }}</h1>
     {% for entry in time_entry_list %}
         <li>{{ "Tätigkeit: " }} {{ entry.entry_text }}</li>
         <li>{{ "Kategorie: "}} {{ entry.entry_category__category_text }}</li>

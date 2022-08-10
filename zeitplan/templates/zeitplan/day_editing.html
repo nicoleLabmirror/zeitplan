@@ -1,7 +1,7 @@
 <form action="{% url 'zeitplan:day_votes' day.id %}" method="post">
 {% csrf_token %}
 <fieldset>
-    <legend><h1>{{ day.day_name }}</h1></legend>
+    <h1>{{ day.day_name }}</h1>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% for entry in time_entry_list %}
         <input type="radio" name="entry" id="entry{{ forloop.counter }}" value="{{ entry.id }}">
