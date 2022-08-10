@@ -1,2 +1,6 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'zeitplan/style.css' %}">
+
 <li>{{ text }}</li>
 <a href="{% url 'zeitplan:overview' %}">{{ "Hier geht's zur Übersicht!" }}</a>
