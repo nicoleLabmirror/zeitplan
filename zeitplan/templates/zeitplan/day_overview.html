@@ -5,14 +5,14 @@
         <li>{{ "Tätigkeit: " }} {{ entry.entry_text }}</li>
         <li>{{ "Kategorie: "}} {{ entry.entry_category__category_text }}</li>
         <li>{{ "Aktuelle Stimmenanzahl: "}} {{ entry.votes }}</li>
-        <br></br>
+        <br>
     {% endfor %}
     </ul>
 {% else %}
     <p>Aktuell keine Einträge vorhanden</p>
 {% endif %}
 <a href="{% url 'zeitplan:day_edit' day.id %}">{{ "Weiter um Einträge zu bearbeiten." }}</a>
-<br></br>
+<br>
 <a href="{% url 'zeitplan:overview' %}">{{ "Zurück zur Übersicht aller Tage." }}</a>
-<br></br>
+<br>
 <a href="{% url 'zeitplan:index' %}">{{ "Zurück zum Start." }}</a>
