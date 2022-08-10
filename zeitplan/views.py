@@ -9,10 +9,12 @@ def index(request):
     context = {"text": text}
     return render(request, "zeitplan/index.html", context)
 
+
 def overview(request):
     all_days_list = Day.objects.all().order_by("day_date")
     context = {"all_days_list": all_days_list}
     return render(request, "zeitplan/overview.html", context)
+
 
 def day_overview(request, day_id):
     day = Day.objects.get(pk=day_id)
@@ -23,6 +25,7 @@ def day_overview(request, day_id):
     }
     return render(request, "zeitplan/day_overview.html", context)
 
+
 def day_edit(request, day_id):
     day = Day.objects.get(pk=day_id)
     time_entry_list = day.time_entry_set.all()
@@ -31,6 +34,7 @@ def day_edit(request, day_id):
         "time_entry_list": time_entry_list,
     }
     return render(request, "zeitplan/day_editing.html", context)
+
 
 def day_votes(request, day_id):
     day = Day.objects.get(pk=day_id)
