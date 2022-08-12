@@ -5,6 +5,7 @@
         <li>{{ "Tätigkeit: " }} {{ entry.entry_text }}</li>
         <li>{{ "Kategorie: "}} {{ entry.entry_category__category_text }}</li>
         <li>{{ "Aktuelle Stimmenanzahl: "}} {{ entry.votes }}</li>
+        <li>{{ "Schon erledigt?" }} {{ entry.entry_status }}</li>
         <br>
     {% endfor %}
     </ul>
