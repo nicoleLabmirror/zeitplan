@@ -6,10 +6,10 @@
     {% for entry in time_entry_list %}
         <input type="radio" name="entry_vote" id="entry_vote{{ forloop.counter }}" value="{{ entry.id }}">
         <label for="entry_vote{{ forloop.counter }}">{{ entry.entry_text }} {{ entry.votes}}</label><br>
-        <input type="submit" value="Vote"><br>
+        <input type="submit" value="Abstimmen"><br>
         <input type="radio" name="entry_passed" id="entry_passed{{ forloop.counter }}" value="{{ entry.id }}">
         <label for="entry_passed{{ forloop.counter }}">{{ entry.entry_text }} {{ entry.entry_status}}</label><br>
-        <input type="submit" value="Passed/Not passed"><br>
+        <input type="submit" value="Erledigt/Nicht erledigt"><br>
     {% endfor %}
 </fieldset>
 </form>
