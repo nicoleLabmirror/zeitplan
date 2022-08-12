@@ -63,4 +63,4 @@ def day_votes(request, day_id):
             else:
                 entries.entry_passed = None
             entries.save()
-        return HttpResponseRedirect(reverse("zeitplan:day_overview", args=(day.id,)))
+        return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
