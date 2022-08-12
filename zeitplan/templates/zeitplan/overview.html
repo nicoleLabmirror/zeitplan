@@ -1,5 +1,6 @@
 {% if all_days_list %}
     <ul>
+    <h1>{{ "Übersicht über alle Tage:" }}</h1>
     {% for day in all_days_list %}
         <li>{{ day.different_day_date }} {{ day.day_name }}</li>
         <a href="{% url 'zeitplan:day_overview' day.id %}">{{ "Wähle diesen Tag aus." }}</a>
