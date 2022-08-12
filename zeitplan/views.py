@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views import generic
 from .models import Day
 
 
@@ -10,11 +11,13 @@ def index(request):
     return render(request, "zeitplan/index.html", context)
 
 
-# TODO ListView?
-def overview(request):
-    all_days_list = Day.objects.all().order_by("day_date")
-    context = {"all_days_list": all_days_list}
-    return render(request, "zeitplan/overview.html", context)
+class OverviewView(generic.ListView):
+    template_name = "zeitplan/overview.html"
+    context_object_name = "all_days_list"
+
+    def get_queryset(self):
+        all_days_list = Day.objects.all().order_by("day_date")
+        return all_days_list
 
 
 def get_time_entry_list(day_id):
