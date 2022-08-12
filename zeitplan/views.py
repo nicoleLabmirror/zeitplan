@@ -10,29 +10,31 @@ def index(request):
     return render(request, "zeitplan/index.html", context)
 
 
+# TODO ListView?
 def overview(request):
     all_days_list = Day.objects.all().order_by("day_date")
     context = {"all_days_list": all_days_list}
     return render(request, "zeitplan/overview.html", context)
 
 
-def day_overview(request, day_id):
+def get_time_entry_list(day_id):
     day = Day.objects.get(pk=day_id)
     time_entry_list = day.time_entry_set.all()
     context = {
         "day": day,
         "time_entry_list": time_entry_list,
     }
+    return context
+
+
+# TODO DetailView?
+def day_overview(request, day_id):
+    context = get_time_entry_list(day_id)
     return render(request, "zeitplan/day_overview.html", context)
 
 
 def day_edit(request, day_id):
-    day = Day.objects.get(pk=day_id)
-    time_entry_list = day.time_entry_set.all()
-    context = {
-        "day": day,
-        "time_entry_list": time_entry_list,
-    }
+    context = get_time_entry_list(day_id)
     return render(request, "zeitplan/day_editing.html", context)
 
 
