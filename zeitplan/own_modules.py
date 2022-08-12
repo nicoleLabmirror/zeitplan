@@ -6,7 +6,7 @@ def get_german_day_name(english_day_name):
         "Thursday": "Donnerstag",
         "Friday": "Freitag",
         "Saturday": "Samstag",
-        "Sunday": "Sonntag"
+        "Sunday": "Sonntag",
     }
     german_day_name = german_translation_for_day_name[english_day_name]
     return german_day_name
