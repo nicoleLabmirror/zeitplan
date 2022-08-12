@@ -37,5 +37,13 @@ class Time_entry(models.Model):
     entry_passed = models.BooleanField(null=True, default=None)
     votes = models.IntegerField(default=0)
 
+    @property
+    def entry_status(self):
+        if self.entry_passed == None:
+            entry_status = "Nicht erledigt"
+        else:
+            entry_status = "Erledigt"
+        return entry_status
+
     def __str__(self):
         return f"Tätigkeit: {self.entry_text}"
