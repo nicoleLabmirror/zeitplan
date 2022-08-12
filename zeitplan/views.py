@@ -47,22 +47,20 @@ def day_votes(request, day_id):
     # TODO using 'if "entry ..." twice doesn't seem like a proper solution
     try:
         if "entry_vote" in request.POST:
-            print("VOTE")
-            entries_votes = day.time_entry_set.get(pk=request.POST["entry_vote"])
+            entries = day.time_entry_set.get(pk=request.POST["entry_vote"])
         elif "entry_passed" in request.POST:
-            print("PASSED")
-            entries_passed = day.time_entry_set.get(pk=request.POST["entry_passed"])
+            entries = day.time_entry_set.get(pk=request.POST["entry_passed"])
     except (KeyError, Day.DoesNotExist):
         context = {"day": day, "error message": "Why?"}
         return render(request, "zeitplan/day_editing.html", context)
     else:
         if "entry_vote" in request.POST:
-            entries_votes.votes += 1
-            entries_votes.save()
+            entries.votes += 1
+            entries.save()
         elif "entry_passed" in request.POST:
-            if entries_passed.entry_passed is None:
-                entries_passed.entry_passed = True
+            if entries.entry_passed is None:
+                entries.entry_passed = True
             else:
-                entries_passed.entry_passed = None
-            entries_passed.save()
+                entries.entry_passed = None
+            entries.save()
         return HttpResponseRedirect(reverse("zeitplan:day_overview", args=(day.id,)))
