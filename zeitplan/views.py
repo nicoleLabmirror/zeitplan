@@ -44,6 +44,7 @@ def day_edit(request, day_id):
 
 def day_votes(request, day_id):
     day = Day.objects.get(pk=day_id)
+    # TODO using 'if "entry ..." twice doesn't seem like a proper solution
     try:
         if "entry_vote" in request.POST:
             print("VOTE")
