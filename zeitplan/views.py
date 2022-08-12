@@ -1,7 +1,8 @@
-from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
+
 from .models import Day
 
 
@@ -46,17 +47,9 @@ def day_votes(request, day_id):
     try:
         entries = day.time_entry_set.get(pk=request.POST["entry"])
     except (KeyError, Day.DoesNotExist):
-        context = {
-            "day": day,
-            "error message": "Why?"
-        }
+        context = {"day": day, "error message": "Why?"}
         return render(request, "zeitplan/day_editing.html", context)
     else:
         entries.votes += 1
         entries.save()
-        return HttpResponseRedirect(
-            reverse(
-                "zeitplan:day_overview",
-                args=(day.id,)
-            )
-        )
+        return HttpResponseRedirect(reverse("zeitplan:day_overview", args=(day.id,)))

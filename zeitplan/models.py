@@ -1,4 +1,5 @@
 from django.db import models
+
 from .own_modules import get_german_day_name
 
 
@@ -13,7 +14,7 @@ class Day(models.Model):
 
     @property
     def different_day_date(self):
-        diff_day_date = self.day_date.strftime("%d"".""%m"".""%Y")
+        diff_day_date = self.day_date.strftime("%d" "." "%m" "." "%Y")
         return diff_day_date
 
     def __str__(self):
@@ -29,7 +30,9 @@ class Entry_category(models.Model):
 
 class Time_entry(models.Model):
     day = models.ForeignKey(Day, on_delete=models.CASCADE)
-    entry_category = models.ForeignKey(Entry_category, models.SET_NULL, blank=True, null=True)
+    entry_category = models.ForeignKey(
+        Entry_category, models.SET_NULL, blank=True, null=True
+    )
     entry_text = models.CharField(max_length=100)
     entry_passed = models.BooleanField(null=True, default=None)
     votes = models.IntegerField(default=0)
