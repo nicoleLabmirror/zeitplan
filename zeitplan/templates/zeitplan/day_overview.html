@@ -1,11 +1,11 @@
 {% if time_entry_list %}
     <ul>
-    <h1>{{ day.day_name }}</h1>
+    <h1>{{ day.day_name }} {{ day.different_day_date }}</h1>
     {% for entry in time_entry_list %}
-        <li>{{ "Tätigkeit: " }} {{ entry.entry_text }}</li>
-        <li>{{ "Kategorie: "}} {{ entry.entry_category__category_text }}</li>
-        <li>{{ "Aktuelle Stimmenanzahl: "}} {{ entry.votes }}</li>
-        <li>{{ "Schon erledigt?" }} {{ entry.entry_status }}</li>
+        <li><b>{{ "Tätigkeit: " }} {{ entry.entry_text }}</li></b>
+        {{ "Kategorie: "}} {{ entry.entry_category__category_text }}<br>
+        {{ "Aktuelle Stimmenanzahl: "}} {{ entry.votes }}<br>
+        {{ "Schon erledigt?" }} {{ entry.entry_status }}<br>
         <br>
     {% endfor %}
     </ul>
