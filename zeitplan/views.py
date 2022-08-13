@@ -7,9 +7,7 @@ from .models import Day
 
 
 def index(request):
-    text = 'Hallo, das ist der aktuelle Prototyp der App "Zeitplan" ... in progress ... still'
-    context = {"text": text}
-    return render(request, "zeitplan/index.html", context)
+    return render(request, "zeitplan/index.html")
 
 
 class OverviewView(generic.ListView):
