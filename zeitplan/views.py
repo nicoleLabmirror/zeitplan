@@ -7,9 +7,7 @@ from .models import Day
 
 
 def index(request):
-    text = 'Hallo, das ist der aktuelle Prototyp der App "Zeitplan" ... in progress ... still'
-    context = {"text": text}
-    return render(request, "zeitplan/index.html", context)
+    return render(request, "zeitplan/index.html")
 
 
 class OverviewView(generic.ListView):
@@ -44,12 +42,23 @@ def day_edit(request, day_id):
 
 def day_votes(request, day_id):
     day = Day.objects.get(pk=day_id)
+    # TODO using 'if "entry ..." twice doesn't seem like a proper solution
     try:
-        entries = day.time_entry_set.get(pk=request.POST["entry"])
+        if "entry_vote" in request.POST:
+            entries = day.time_entry_set.get(pk=request.POST["entry_vote"])
+        elif "entry_passed" in request.POST:
+            entries = day.time_entry_set.get(pk=request.POST["entry_passed"])
     except (KeyError, Day.DoesNotExist):
         context = {"day": day, "error message": "Why?"}
         return render(request, "zeitplan/day_editing.html", context)
     else:
-        entries.votes += 1
-        entries.save()
-        return HttpResponseRedirect(reverse("zeitplan:day_overview", args=(day.id,)))
+        if "entry_vote" in request.POST:
+            entries.votes += 1
+            entries.save()
+        elif "entry_passed" in request.POST:
+            if entries.entry_passed is None:
+                entries.entry_passed = True
+            else:
+                entries.entry_passed = None
+            entries.save()
+        return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))

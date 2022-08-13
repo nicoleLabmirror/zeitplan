@@ -1,17 +1,21 @@
 <form action="{% url 'zeitplan:day_votes' day.id %}" method="post">
 {% csrf_token %}
-<fieldset>
-    <h1>{{ day.day_name }}</h1>
+    <ul>
+    <h1>{{ day.day_name }} {{ day.different_day_date }}</h1>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% for entry in time_entry_list %}
-        <input type="radio" name="entry" id="entry{{ forloop.counter }}" value="{{ entry.id }}">
-        <label for="entry{{ forloop.counter }}">{{ entry.entry_text }} {{ entry.votes}}</label><br>
-        <input type="submit" value="Vote"><br>
+        <li><b>{{ "Tätigkeit:" }} {{ entry.entry_text}}<br></b></li>
+        <input type="radio" name="entry_vote" id="entry_vote{{ forloop.counter }}" value="{{ entry.id }}">
+        <label for="entry_vote{{ forloop.counter }}">{{ "Aktuelle Stimmanzahl:" }} {{ entry.votes}}</label><br>
+        <input type="submit" value="Abstimmen"><br>
+        <input type="radio" name="entry_passed" id="entry_passed{{ forloop.counter }}" value="{{ entry.id }}">
+        <label for="entry_passed{{ forloop.counter }}">{{ "Schon erledigt?" }} {{ entry.entry_status}}</label><br>
+        <input type="submit" value="Status ändern"><br></br>
     {% endfor %}
-</fieldset>
 </form>
 <a href="{% url 'zeitplan:day_overview' day.id %}">{{ "Zurück zur Tagesübersicht." }}</a>
 <br>
 <a href="{% url 'zeitplan:overview' %}">{{ "Zurück zur Übersicht aller Tage." }}</a>
 <br>
 <a href="{% url 'zeitplan:index' %}">{{ "Zurück zum Start." }}</a>
+</ul>
