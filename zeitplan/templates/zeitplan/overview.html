@@ -7,8 +7,8 @@
         <a href="{% url 'zeitplan:day_overview' day.id %}">{{ "Wähle diesen Tag aus." }}</a>
         <br></br>
     {% endfor %}
-    </ul>
 {% else %}
     <p>No days are available.</p>
 {% endif %}
 <a href="{% url 'zeitplan:index' %}">{{ "Zurück zum Start." }}</a>
+</ul>
