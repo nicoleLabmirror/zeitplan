@@ -35,6 +35,7 @@ def day_overview(request, day_id):
     return render(request, "zeitplan/day_overview.html", context)
 
 
+# Editing entry
 def day_edit(request, day_id):
     context = get_time_entry_list(day_id)
     return render(request, "zeitplan/day_editing.html", context)
@@ -62,3 +63,15 @@ def day_votes(request, day_id):
                 entries.entry_passed = None
             entries.save()
         return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
+
+
+# Add new day
+def day_new(request):
+    return render(request, "zeitplan/day_new.html")
+
+
+def day_add_new(request):
+    new_day = Day(day_date=request.POST["new_day"])
+    new_day.save()
+
+    return HttpResponseRedirect(reverse("zeitplan:overview"))

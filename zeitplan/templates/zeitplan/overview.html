@@ -1,6 +1,6 @@
 {% if all_days_list %}
     <ul>
-    <h1>{{ "Übersicht über alle Tage:" }}</h1>
+    <h1>{{ "Übersicht über alle Tage" }}</h1>
     {% for day in all_days_list %}
         <li><b>{{ day.day_name }}</b></li>
         {{ day.different_day_date }}<br>
@@ -10,5 +10,6 @@
 {% else %}
     <p>No days are available.</p>
 {% endif %}
+<a href="{% url 'zeitplan:day_new' %}">{{ "Neuen Tag anlegen." }}</a><br>
 <a href="{% url 'zeitplan:index' %}">{{ "Zurück zum Start." }}</a>
 </ul>
