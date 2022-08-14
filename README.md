@@ -18,4 +18,9 @@
 * Add time frame for entry
 * Order time entries ascending
 
+### Refactoring / TODO
+
+* Use generic views
+* Streamline templates
+
 # :-D
