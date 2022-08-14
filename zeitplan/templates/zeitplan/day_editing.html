@@ -6,12 +6,23 @@
     {% for entry in time_entry_list %}
         <li><b>{{ "Tätigkeit:" }} {{ entry.entry_text}}<br></b></li>
         <input type="checkbox" name="entry_vote" id="entry_vote{{ forloop.counter }}" value="{{ entry.id }}">
-        <label for="entry_vote{{ forloop.counter }}">{{ "Aktuelle Stimmanzahl:" }} {{ entry.votes}}</label><br>
+        <label for="entry_vote{{ forloop.counter }}">{{ "Aktuelle Stimmanzahl:" }} {{ entry.votes }}</label><br>
         <input type="submit" value="Abstimmen"><br>
         <input type="checkbox" name="entry_passed" id="entry_passed{{ forloop.counter }}" value="{{ entry.id }}">
-        <label for="entry_passed{{ forloop.counter }}">{{ "Schon erledigt?" }} {{ entry.entry_status}}</label><br>
+        <label for="entry_passed{{ forloop.counter }}">{{ "Schon erledigt?" }} {{ entry.entry_status }}</label><br>
         <input type="submit" value="Status ändern"><br></br>
     {% endfor %}
+        </ul>
+</form>
+<form action="{% url 'zeitplan:time_entry_add' day.id %}" method="post">
+{% csrf_token %}
+    <ul>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <li><b>{{ "Neue Tätigkeit anlegen:" }}<br></b></li>
+        {{ "Tätigkeit benennen: " }}
+        <input type="text" name="entry_add" id="entry_add{{ forloop.counter }}">
+        <label for="entry_add{{ forloop.counter }}"></label><br>
+        <input type="submit" value="Tätigkeit anlegen"><br>
         </ul>
 </form>
 <a href="{% url 'zeitplan:day_overview' day.id %}">{{ "Zurück zur Tagesübersicht." }}</a>

@@ -83,3 +83,11 @@ def day_delete(request, day_id):
     day_deleting.delete()
 
     return HttpResponseRedirect(reverse("zeitplan:overview"))
+
+
+# Add new time entry
+def time_entry_add(request, day_id):
+    day = Day.objects.get(pk=day_id)
+    new_entry = day.time_entry_set.create(entry_text=request.POST["entry_add"])
+    new_entry.save()
+    return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
