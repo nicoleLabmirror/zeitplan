@@ -15,5 +15,7 @@
 ### Planned features:
 
 * Add category for time entry
+* Add time frame for entry
+* Order time entries ascending
 
 # :-D
