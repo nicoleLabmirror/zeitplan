@@ -39,7 +39,7 @@ class Time_entry(models.Model):
 
     @property
     def entry_status(self):
-        if self.entry_passed == None:
+        if self.entry_passed is None:
             entry_status = "Nicht erledigt"
         else:
             entry_status = "Erledigt"
