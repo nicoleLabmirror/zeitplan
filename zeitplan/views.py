@@ -35,13 +35,13 @@ def day_overview(request, day_id):
     return render(request, "zeitplan/day_overview.html", context)
 
 
-# Editing entry
+# Editing entry (vote, delete etc.)
 def day_edit(request, day_id):
     context = get_time_entry_list(day_id)
     return render(request, "zeitplan/day_editing.html", context)
 
 
-def day_votes(request, day_id):
+def day_editing(request, day_id):
     day = Day.objects.get(pk=day_id)
     # TODO using 'if "entry ..." twice doesn't seem like a proper solution
     try:
@@ -49,6 +49,8 @@ def day_votes(request, day_id):
             entries = day.time_entry_set.get(pk=request.POST["entry_vote"])
         elif "entry_passed" in request.POST:
             entries = day.time_entry_set.get(pk=request.POST["entry_passed"])
+        elif "entry_delete" in request.POST:
+            entries = day.time_entry_set.get(pk=request.POST["entry_delete"])
     except (KeyError, Day.DoesNotExist):
         context = {"day": day, "error message": "Why?"}
         return render(request, "zeitplan/day_editing.html", context)
@@ -62,6 +64,8 @@ def day_votes(request, day_id):
             else:
                 entries.entry_passed = None
             entries.save()
+        elif "entry_delete" in request.POST:
+            entries.delete()
         return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
 
 
