@@ -75,3 +75,11 @@ def day_add_new(request):
     new_day.save()
 
     return HttpResponseRedirect(reverse("zeitplan:overview"))
+
+
+# Delete day
+def day_delete(request, day_id):
+    day_deleting = Day.objects.get(pk=day_id)
+    day_deleting.delete()
+
+    return HttpResponseRedirect(reverse("zeitplan:overview"))
