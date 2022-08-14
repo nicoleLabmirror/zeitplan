@@ -1,6 +1,8 @@
+<form action="{% url 'zeitplan:day_delete' day.id %}" method="post">
+{% csrf_token %}<ul>
+<h1>{{ day.day_name }} {{ day.different_day_date }}</h1>
 {% if time_entry_list %}
-    <ul>
-    <h1>{{ day.day_name }} {{ day.different_day_date }}</h1>
+
     {% for entry in time_entry_list %}
         <li><b>{{ "Tätigkeit: " }} {{ entry.entry_text }}</li></b>
         {{ "Kategorie: "}} {{ entry.entry_category__category_text }}<br>
@@ -11,6 +13,11 @@
 {% else %}
     <p>Aktuell keine Einträge vorhanden</p>
 {% endif %}
+    <li><b>{{ "Tag entfernen?" }}</b></li>
+        <label for="day_delete{{ forloop.counter }}"></label><br>
+        <input type="submit" value="Tag entfernen"><br></br>
+<form action="{% url 'zeitplan:day_add_new' %}" method="post">
+{% csrf_token %}
 <a href="{% url 'zeitplan:day_edit' day.id %}">{{ "Weiter um Einträge zu bearbeiten." }}</a>
 <br>
 <a href="{% url 'zeitplan:overview' %}">{{ "Zurück zur Übersicht aller Tage." }}</a>
