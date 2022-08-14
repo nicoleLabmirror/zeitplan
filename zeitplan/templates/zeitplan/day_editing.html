@@ -28,8 +28,9 @@
         <input type="submit" value="Tätigkeit anlegen"><br>
         </ul>
 </form>
-<a href="{% url 'zeitplan:day_overview' day.id %}">{{ "Zurück zur Tagesübersicht." }}</a>
+<ul></il><a href="{% url 'zeitplan:day_overview' day.id %}">{{ "Zurück zur Tagesübersicht." }}</a>
 <br>
 <a href="{% url 'zeitplan:overview' %}">{{ "Zurück zur Übersicht aller Tage." }}</a>
 <br>
 <a href="{% url 'zeitplan:index' %}">{{ "Zurück zum Start." }}</a>
+</ul>
