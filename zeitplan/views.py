@@ -72,12 +72,12 @@ def day_editing(request, day_id):
 def category_add(request, entry_id):
     entry = Time_entry.objects.get(pk=entry_id)
     day = entry.day
-    print(day)
-    print(entry)
-    entry.entry_category_id__entry_text = request.POST["category_add"]
-    print(entry.entry_category_id__entry_text)
+    new_category = Entry_category(category_text=request.POST["category_add"])
+    new_category.save()
+    entry.entry_category_id = new_category.id
     entry.save()
     return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
+
 
 # Add new day
 def day_new(request):
@@ -87,7 +87,6 @@ def day_new(request):
 def day_add_new(request):
     new_day = Day(day_date=request.POST["new_day"])
     new_day.save()
-
     return HttpResponseRedirect(reverse("zeitplan:overview"))
 
 
@@ -95,7 +94,6 @@ def day_add_new(request):
 def day_delete(request, day_id):
     day_deleting = Day.objects.get(pk=day_id)
     day_deleting.delete()
-
     return HttpResponseRedirect(reverse("zeitplan:overview"))
 
 

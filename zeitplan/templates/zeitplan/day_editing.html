@@ -20,7 +20,8 @@
         </form>
         <form action="{% url 'zeitplan:category_add' entry.id %}" method="post">
             {% csrf_token %}
-        {{ "Kategory ändern" }}
+        {{ "Aktuelle Kategorie:" }} {{ entry.entry_category.category_text }}<br>
+        {{ "Kategorie ändern" }}
         <input type="text" name="category_add" id="category_add{{ forloop.counter }}">
         <label for="category_add{{ forloop.counter }}"></label><br>
         <input type="submit" value="Abstimmen"><br>
