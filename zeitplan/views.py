@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
 
-from .models import Day
+from .models import Day, Time_entry, Entry_category
 
 
 def index(request):
@@ -68,6 +68,16 @@ def day_editing(request, day_id):
             entries.delete()
         return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
 
+
+def category_add(request, entry_id):
+    entry = Time_entry.objects.get(pk=entry_id)
+    day = entry.day
+    print(day)
+    print(entry)
+    entry.entry_category_id__entry_text = request.POST["category_add"]
+    print(entry.entry_category_id__entry_text)
+    entry.save()
+    return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
 
 # Add new day
 def day_new(request):
