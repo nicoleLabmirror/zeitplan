@@ -36,6 +36,8 @@ class Time_entry(models.Model):
     entry_text = models.CharField(max_length=100)
     entry_passed = models.BooleanField(null=True, default=None)
     votes = models.IntegerField(default=0)
+    start_of_entry = models.DateField(null=True, default=None)
+    end_of_entry = models.DateField(null=True, default=None)
 
     @property
     def entry_status(self):
