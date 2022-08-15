@@ -29,7 +29,6 @@ def get_time_entry_list(day_id):
     return context
 
 
-# TODO DetailView?
 def day_overview(request, day_id):
     context = get_time_entry_list(day_id)
     return render(request, "zeitplan/day_overview.html", context)
@@ -67,6 +66,7 @@ def day_editing(request, day_id):
         elif "entry_delete" in request.POST:
             entries.delete()
         return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
+
 
 # Add (and change) category
 def category_add(request, entry_id):
