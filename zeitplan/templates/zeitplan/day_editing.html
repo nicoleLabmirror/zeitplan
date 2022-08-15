@@ -5,6 +5,8 @@
         <form action="{% url 'zeitplan:day_editing' day.id %}" method="post">
             {% csrf_token %}
         <li><b>{{ "Tätigkeit:" }} {{ entry.entry_text}}<br></b></li>
+        {{ "Start:" }} {{ entry.start_of_entry }}<br>
+        {{ "Ende:" }} {{entry.end_of_entry }}<br>
         <input type="checkbox" name="entry_vote" id="entry_vote{{ forloop.counter }}" value="{{ entry.id }}">
         <label for="entry_vote{{ forloop.counter }}">{{ "Aktuelle Stimmanzahl:" }} {{ entry.votes }}</label><br>
         <input type="submit" value="Abstimmen"><br>
