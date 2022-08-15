@@ -1,22 +1,33 @@
-<form action="{% url 'zeitplan:day_editing' day.id %}" method="post">
-{% csrf_token %}
-    <ul>
+<ul>
     <h1>{{ day.day_name }} {{ day.different_day_date }}</h1>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% for entry in time_entry_list %}
+        <form action="{% url 'zeitplan:day_editing' day.id %}" method="post">
+            {% csrf_token %}
         <li><b>{{ "Tätigkeit:" }} {{ entry.entry_text}}<br></b></li>
         <input type="checkbox" name="entry_vote" id="entry_vote{{ forloop.counter }}" value="{{ entry.id }}">
         <label for="entry_vote{{ forloop.counter }}">{{ "Aktuelle Stimmanzahl:" }} {{ entry.votes }}</label><br>
         <input type="submit" value="Abstimmen"><br>
+
         <input type="checkbox" name="entry_passed" id="entry_passed{{ forloop.counter }}" value="{{ entry.id }}">
         <label for="entry_passed{{ forloop.counter }}">{{ "Schon erledigt?" }} {{ entry.entry_status }}</label><br>
         <input type="submit" value="Status ändern"><br>
+
         <input type="checkbox" name="entry_delete" id="entry_delete{{ forloop.counter }}" value="{{ entry.id }}">
-        <label for="day_delete{{ forloop.counter }}">{{ "Tätigkeit entfernen?" }}</label><br>
-        <input type="submit" value="Tag entfernen"><br></br>
+        <label for="entry_delete{{ forloop.counter }}">{{ "Tätigkeit entfernen?" }}</label><br>
+        <input type="submit" value="Tag entfernen">
+        </form>
+        <form action="{% url 'zeitplan:category_add' entry.id %}" method="post">
+            {% csrf_token %}
+        {{ "Aktuelle Kategorie:" }} {{ entry.entry_category.category_text }}<br>
+        {{ "Kategorie ändern" }}
+        <input type="text" name="category_add" id="category_add{{ forloop.counter }}">
+        <label for="category_add{{ forloop.counter }}"></label><br>
+        <input type="submit" value="Abstimmen"><br>
+        </form>
     {% endfor %}
         </ul>
-</form>
+
 <form action="{% url 'zeitplan:time_entry_add' day.id %}" method="post">
 {% csrf_token %}
     <ul>

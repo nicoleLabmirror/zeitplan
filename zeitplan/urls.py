@@ -13,4 +13,5 @@ urlpatterns = [
     path("<int:day_id>/edit/", views.day_edit, name="day_edit"),
     path("<int:day_id>/votes/", views.day_editing, name="day_editing"),
     path("<int:day_id>/new_time_entry/", views.time_entry_add, name="time_entry_add"),
+    path("<int:entry_id>/category_add/", views.category_add, name="category_add"),
 ]

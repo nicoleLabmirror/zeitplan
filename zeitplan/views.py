@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
 
-from .models import Day
+from .models import Day, Time_entry, Entry_category
 
 
 def index(request):
@@ -29,7 +29,6 @@ def get_time_entry_list(day_id):
     return context
 
 
-# TODO DetailView?
 def day_overview(request, day_id):
     context = get_time_entry_list(day_id)
     return render(request, "zeitplan/day_overview.html", context)
@@ -69,6 +68,17 @@ def day_editing(request, day_id):
         return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
 
 
+# Add (and change) category
+def category_add(request, entry_id):
+    entry = Time_entry.objects.get(pk=entry_id)
+    day = entry.day
+    new_category = Entry_category(category_text=request.POST["category_add"])
+    new_category.save()
+    entry.entry_category = new_category
+    entry.save()
+    return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
+
+
 # Add new day
 def day_new(request):
     return render(request, "zeitplan/day_new.html")
@@ -77,7 +87,6 @@ def day_new(request):
 def day_add_new(request):
     new_day = Day(day_date=request.POST["new_day"])
     new_day.save()
-
     return HttpResponseRedirect(reverse("zeitplan:overview"))
 
 
@@ -85,7 +94,6 @@ def day_add_new(request):
 def day_delete(request, day_id):
     day_deleting = Day.objects.get(pk=day_id)
     day_deleting.delete()
-
     return HttpResponseRedirect(reverse("zeitplan:overview"))
 
 

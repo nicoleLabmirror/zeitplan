@@ -5,7 +5,7 @@
 
     {% for entry in time_entry_list %}
         <li><b>{{ "Tätigkeit: " }} {{ entry.entry_text }}</li></b>
-        {{ "Kategorie: "}} {{ entry.entry_category__category_text }}<br>
+        {{ "Kategorie: "}} {{ entry.entry_category.category_text }}<br>
         {{ "Aktuelle Stimmenanzahl: "}} {{ entry.votes }}<br>
         {{ "Schon erledigt?" }} {{ entry.entry_status }}<br>
         <br>
