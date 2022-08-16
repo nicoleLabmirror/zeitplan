@@ -49,9 +49,10 @@ class Time_entry(models.Model):
 
     @property
     def proper_time_format(self):
-        start = self.start_of_entry.strftime("%H" ":" "%M")
-        end = self.end_of_entry.strftime("%H" ":" "%M")
-        return start, end
+        if self.start_of_entry and self.end_of_entry is not None:
+            start = self.start_of_entry.strftime("%H" ":" "%M")
+            end = self.end_of_entry.strftime("%H" ":" "%M")
+            return start, end
 
     def __str__(self):
         return f"Tätigkeit: {self.entry_text}"
