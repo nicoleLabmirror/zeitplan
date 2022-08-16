@@ -79,6 +79,16 @@ def category_add(request, entry_id):
     return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
 
 
+# Add time frame for entry
+def add_time_frame(request, entry_id):
+    entry = Time_entry.objects.get(pk=entry_id)
+    day = entry.day
+    date = day.day_date
+    entry.start_of_entry = "%sT%s" % (date, request.POST["add_time_frame_start"])
+    entry.end_of_entry = "%sT%s" % (date, request.POST["add_time_frame_end"])
+    entry.save()
+    return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(day.id,)))
+
 # Add new day
 def day_new(request):
     return render(request, "zeitplan/day_new.html")
