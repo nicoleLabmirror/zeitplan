@@ -11,12 +11,15 @@
 * Change state of time entry
 * Add a new time entry
 * Delete time entry
-
-### Planned features:
-
 * Add category for time entry
 * Add time frame for entry
 * Order time entries ascending
+
+### Planned features:
+
+* Don't know ... currently testing ^^
+* Writing tests?
+* html? css? D: 
 
 ### Refactoring / TODO
 
