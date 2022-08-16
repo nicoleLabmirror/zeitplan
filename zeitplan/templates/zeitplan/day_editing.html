@@ -2,9 +2,20 @@
     <h1>{{ day.day_name }} {{ day.different_day_date }}</h1>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% for entry in time_entry_list %}
+    <li><b>{{ "Tätigkeit:" }} {{ entry.entry_text}}<br></b></li>
+        <form action ="{% url 'zeitplan:add_time_frame' entry.id %}" method="post">
+        {% csrf_token %}
+        {{ "Startzeit:" }} {{ entry.proper_time_format.0 }}
+        <input type="time" name="add_time_frame_start" id="add_time_frame_start{{ forloop.counter }}">
+        <label for="add_time_frame{{ forloop.counter }}"></label><br>
+        {{ "Endzeit:" }} {{ entry.proper_time_format.1 }}
+        <input type="time" name="add_time_frame_end" id="add_time_frame_end{{ forloop.counter }}">
+        <label for="add_time_frame{{ forloop.counter }}"></label><br>
+        <input type="submit" value="Zeit speichern"><br>
+        </form>
+
         <form action="{% url 'zeitplan:day_editing' day.id %}" method="post">
-            {% csrf_token %}
-        <li><b>{{ "Tätigkeit:" }} {{ entry.entry_text}}<br></b></li>
+        {% csrf_token %}
         <input type="checkbox" name="entry_vote" id="entry_vote{{ forloop.counter }}" value="{{ entry.id }}">
         <label for="entry_vote{{ forloop.counter }}">{{ "Aktuelle Stimmanzahl:" }} {{ entry.votes }}</label><br>
         <input type="submit" value="Abstimmen"><br>

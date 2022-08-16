@@ -36,6 +36,8 @@ class Time_entry(models.Model):
     entry_text = models.CharField(max_length=100)
     entry_passed = models.BooleanField(null=True, default=None)
     votes = models.IntegerField(default=0)
+    start_of_entry = models.DateTimeField(null=True, default=None)
+    end_of_entry = models.DateTimeField(null=True, default=None)
 
     @property
     def entry_status(self):
@@ -44,6 +46,13 @@ class Time_entry(models.Model):
         else:
             entry_status = "Erledigt"
         return entry_status
+
+    @property
+    def proper_time_format(self):
+        if self.start_of_entry and self.end_of_entry is not None:
+            start = self.start_of_entry.strftime("%H" ":" "%M")
+            end = self.end_of_entry.strftime("%H" ":" "%M")
+            return start, end
 
     def __str__(self):
         return f"Tätigkeit: {self.entry_text}"
