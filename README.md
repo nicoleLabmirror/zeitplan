@@ -19,7 +19,11 @@
 
 * Don't know ... currently testing ^^
 * Writing tests?
-* html? css? D: 
+* html? css? D:
+
+### Error log
+
+* Adding time frame leads to an error if only one time (start or end) is entered
 
 ### Refactoring / TODO
 
