@@ -1,6 +1,6 @@
 from django.db import models
 
-from .own_modules import get_german_day_name
+from .helper_functions import get_german_day_name
 
 
 class Day(models.Model):
