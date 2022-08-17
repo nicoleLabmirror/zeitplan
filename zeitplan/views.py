@@ -43,11 +43,17 @@ def day_edit(request, day_id):
 def day_editing(request, day_id):
     try:
         if "entry_vote" in request.POST:
-            entries = Day.objects.get(pk=day_id).time_entry_set.get(pk=request.POST["entry_vote"])
+            entries = Day.objects.get(pk=day_id).time_entry_set.get(
+                pk=request.POST["entry_vote"]
+            )
         elif "entry_passed" in request.POST:
-            entries = Day.objects.get(pk=day_id).time_entry_set.get(pk=request.POST["entry_passed"])
+            entries = Day.objects.get(pk=day_id).time_entry_set.get(
+                pk=request.POST["entry_passed"]
+            )
         elif "entry_delete" in request.POST:
-            entries = Day.objects.get(pk=day_id).time_entry_set.get(pk=request.POST["entry_delete"])
+            entries = Day.objects.get(pk=day_id).time_entry_set.get(
+                pk=request.POST["entry_delete"]
+            )
     except (KeyError, Day.DoesNotExist):
         context = {"day": Day.objects.get(pk=day_id), "error message": "Why?"}
         return render(request, "zeitplan/day_editing.html", context)
@@ -63,7 +69,9 @@ def day_editing(request, day_id):
             entries.save()
         elif "entry_delete" in request.POST:
             entries.delete()
-        return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(Day.objects.get(pk=day_id).id,)))
+        return HttpResponseRedirect(
+            reverse("zeitplan:day_edit", args=(Day.objects.get(pk=day_id).id,))
+        )
 
 
 # Add (and change) category
@@ -79,8 +87,14 @@ def category_add(request, entry_id):
 # Add time frame for entry
 def add_time_frame(request, entry_id):
     entry = Time_entry.objects.get(pk=entry_id)
-    entry.start_of_entry = "%sT%s" % (entry.day.day_date, request.POST["add_time_frame_start"])
-    entry.end_of_entry = "%sT%s" % (entry.day.day_date, request.POST["add_time_frame_end"])
+    entry.start_of_entry = "%sT%s" % (
+        entry.day.day_date,
+        request.POST["add_time_frame_start"],
+    )
+    entry.end_of_entry = "%sT%s" % (
+        entry.day.day_date,
+        request.POST["add_time_frame_end"],
+    )
     entry.save()
     return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(entry.day.id,)))
 
@@ -105,6 +119,8 @@ def day_delete(request, day_id):
 
 # Add new time entry
 def time_entry_add(request, day_id):
-    new_entry = Day.objects.get(pk=day_id).time_entry_set.create(entry_text=request.POST["entry_add"])
+    new_entry = Day.objects.get(pk=day_id).time_entry_set.create(
+        entry_text=request.POST["entry_add"]
+    )
     new_entry.save()
     return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(new_entry.day.id,)))
