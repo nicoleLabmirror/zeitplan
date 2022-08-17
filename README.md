@@ -17,9 +17,10 @@
 
 ### Planned features:
 
-* Don't know ... currently testing ^^
-* Writing tests?
-* html? css? D:
+* If no time is entered, use "None" or previos value
+* Kind of an auto zoom (app looks super small on moble devices)
+* Design is super ugly. html? css? D:
+* Tests? ^^
 
 ### Error log
 
