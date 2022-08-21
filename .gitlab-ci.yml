@@ -1,0 +1,14 @@
+stages:
+  - build
+  - test
+
+build-code-job:
+  stage: build
+  script:
+    - echo "test test"
+    - python --version
+
+test-code-job1:
+  stage: test
+  script:
+    - echo "asdfdasfasdf"
