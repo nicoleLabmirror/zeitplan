@@ -7,7 +7,6 @@ build-code-job:
   script:
     - echo "test test"
     - python --version
-    - rake
 
 test-code-job1:
   stage: test
