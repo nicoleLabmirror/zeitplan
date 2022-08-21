@@ -17,10 +17,10 @@
 
 ### Planned features:
 
-* If no time is entered, use "None" or previos value
 * Kind of an auto zoom (app looks super small on moble devices)
 * Design is super ugly. html? css? D:
-* Tests? ^^
+* Tests
+* CI/CD 
 
 ### Error log
 
@@ -30,5 +30,6 @@
 
 * Use generic views
 * Streamline templates
+* If no time is entered, use "None" or previos value
 
 # :-D
