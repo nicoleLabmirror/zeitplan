@@ -34,7 +34,6 @@ def day_overview(request, day_id):
     return render(request, "zeitplan/day_overview.html", context)
 
 
-# Editing entry (vote, delete etc.)
 def day_edit(request, day_id):
     context = get_time_entry_list(day_id)
     return render(request, "zeitplan/day_editing.html", context)
@@ -74,7 +73,6 @@ def day_editing(request, day_id):
         )
 
 
-# Add (and change) category
 def category_add(request, entry_id):
     entry = Time_entry.objects.get(pk=entry_id)
     new_category = Entry_category(category_text=request.POST["category_add"])
@@ -84,7 +82,6 @@ def category_add(request, entry_id):
     return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(entry.day.id,)))
 
 
-# Add time frame for entry
 def add_time_frame(request, entry_id):
     entry = Time_entry.objects.get(pk=entry_id)
     entry.start_of_entry = "%sT%s" % (
@@ -99,7 +96,6 @@ def add_time_frame(request, entry_id):
     return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(entry.day.id,)))
 
 
-# Add new day
 def day_new(request):
     return render(request, "zeitplan/day_new.html")
 
@@ -110,14 +106,12 @@ def day_add_new(request):
     return HttpResponseRedirect(reverse("zeitplan:overview"))
 
 
-# Delete day
 def day_delete(request, day_id):
     day_deleting = Day.objects.get(pk=day_id)
     day_deleting.delete()
     return HttpResponseRedirect(reverse("zeitplan:overview"))
 
 
-# Add new time entry
 def time_entry_add(request, day_id):
     new_entry = Day.objects.get(pk=day_id).time_entry_set.create(
         entry_text=request.POST["entry_add"]
