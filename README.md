@@ -1,6 +1,13 @@
 # App Zeitplan
 ## First app. Basic stuff to *learn* Python Django 
-### Current features:
+
+### Planned:
+
+* MY TEMPLATES ARE BAD AND I SHOULD FEEL BAD
+* "Design" ...
+* Tests? CI/CD? 
+
+### Done ... sorta:
 
 * Overview of all days
 * Select a day
@@ -15,18 +22,11 @@
 * Add time frame for entry
 * Order time entries ascending
 
-### Planned features:
-
-* Kind of an auto zoom (app looks super small on moble devices)
-* Design is super ugly. html? css? D:
-* Tests
-* CI/CD 
-
-### Error log
+### Error?
 
 * Adding time frame leads to an error if only one time (start or end) is entered
 
-### Refactoring / TODO
+### TODO
 
 * Use generic views
 * Streamline templates
