@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
 
-from .models import Day, Entry_category, Time_entry
+from .models import Day, EntryCategory, TimeEntry
 
 
 def index(request):
@@ -74,8 +74,8 @@ def day_editing(request, day_id):
 
 
 def category_add(request, entry_id):
-    entry = Time_entry.objects.get(pk=entry_id)
-    new_category = Entry_category(category_text=request.POST["category_add"])
+    entry = TimeEntry.objects.get(pk=entry_id)
+    new_category = EntryCategory(category_text=request.POST["category_add"])
     new_category.save()
     entry.entry_category = new_category
     entry.save()
@@ -83,7 +83,7 @@ def category_add(request, entry_id):
 
 
 def add_time_frame(request, entry_id):
-    entry = Time_entry.objects.get(pk=entry_id)
+    entry = TimeEntry.objects.get(pk=entry_id)
     entry.start_of_entry = "%sT%s" % (
         entry.day.day_date,
         request.POST["add_time_frame_start"],

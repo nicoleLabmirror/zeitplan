@@ -21,17 +21,17 @@ class Day(models.Model):
         return f"Datum: {self.day_date}"
 
 
-class Entry_category(models.Model):
+class EntryCategory(models.Model):
     category_text = models.CharField(max_length=100)
 
     def __str__(self):
         return f"Kategorie: {self.category_text}"
 
 
-class Time_entry(models.Model):
+class TimeEntry(models.Model):
     day = models.ForeignKey(Day, on_delete=models.CASCADE)
     entry_category = models.ForeignKey(
-        Entry_category, models.SET_NULL, blank=True, null=True
+        EntryCategory, models.SET_NULL, blank=True, null=True
     )
     entry_text = models.CharField(max_length=100)
     entry_passed = models.BooleanField(null=True, default=None)
