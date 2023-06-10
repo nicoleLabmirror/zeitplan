@@ -21,7 +21,7 @@ class OverviewView(generic.ListView):
 
 def get_time_entry_list(day_id):
     day = Day.objects.get(pk=day_id)
-    time_entry_list = day.time_entry_set.all().order_by("start_of_entry")
+    time_entry_list = day.timeentry_set.all().order_by("start_of_entry")
     context = {
         "day": day,
         "time_entry_list": time_entry_list,
@@ -42,15 +42,15 @@ def day_edit(request, day_id):
 def day_editing(request, day_id):
     try:
         if "entry_vote" in request.POST:
-            entries = Day.objects.get(pk=day_id).time_entry_set.get(
+            entries = Day.objects.get(pk=day_id).timeentry_set.get(
                 pk=request.POST["entry_vote"]
             )
         elif "entry_passed" in request.POST:
-            entries = Day.objects.get(pk=day_id).time_entry_set.get(
+            entries = Day.objects.get(pk=day_id).timeentry_set.get(
                 pk=request.POST["entry_passed"]
             )
         elif "entry_delete" in request.POST:
-            entries = Day.objects.get(pk=day_id).time_entry_set.get(
+            entries = Day.objects.get(pk=day_id).timeentry_set.get(
                 pk=request.POST["entry_delete"]
             )
     except (KeyError, Day.DoesNotExist):
@@ -113,7 +113,7 @@ def day_delete(request, day_id):
 
 
 def time_entry_add(request, day_id):
-    new_entry = Day.objects.get(pk=day_id).time_entry_set.create(
+    new_entry = Day.objects.get(pk=day_id).timeentry_set.create(
         entry_text=request.POST["entry_add"]
     )
     new_entry.save()
