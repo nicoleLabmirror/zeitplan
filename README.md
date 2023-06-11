@@ -1,11 +1,11 @@
 # App Zeitplan
 ## First app. Basic stuff to *learn* Python Django 
 
-### Planned:
+### Planned & TODO:
 
 * MY TEMPLATES ARE BAD AND I SHOULD FEEL BAD
-* "Design" ...
 * Tests? CI/CD? 
+* Generic views?
 
 ### Done ... sorta:
 
@@ -25,11 +25,5 @@
 ### Error?
 
 * Adding time frame leads to an error if only one time (start or end) is entered
-
-### TODO
-
-* Use generic views
-* Streamline templates
-* If no time is entered, use "None" or previos value
 
 # :-D
