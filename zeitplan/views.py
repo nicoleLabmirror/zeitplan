@@ -10,13 +10,20 @@ def index(request):
     return render(request, "zeitplan/index.html")
 
 
-class OverviewView(generic.ListView):
-    template_name = "zeitplan/overview.html"
-    context_object_name = "all_days_list"
+# class OverviewView(generic.ListView):
+#     template_name = "zeitplan/overview.html"
+#     context_object_name = "all_days_list"
+#
+#     def get_queryset(self):
+#         all_days_list = Day.objects.all().order_by("day_date")
+#        return all_days_list
 
-    def get_queryset(self):
-        all_days_list = Day.objects.all().order_by("day_date")
-        return all_days_list
+def overview(request):
+    all_days = Day.objects.all().order_by("day_date")
+    context = {
+        "all_days_list": all_days
+    }
+    return render(request, "zeitplan/overview.html", context)
 
 
 def get_time_entry_list(day_id):
