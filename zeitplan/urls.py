@@ -5,7 +5,8 @@ from . import views
 app_name = "zeitplan"
 urlpatterns = [
     path("index/", views.index, name="index"),
-    path("overview/", views.OverviewView.as_view(), name="overview"),
+    #path("overview/", views.OverviewView.as_view(), name="overview"),
+    path("overview/", views.overview, name="overview"),
     path("new_day/", views.day_new, name="day_new"),
     path("add_new_day/", views.day_add_new, name="day_add_new"),
     path("<int:day_id>/", views.day_overview, name="day_overview"),
