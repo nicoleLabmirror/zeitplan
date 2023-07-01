@@ -1,8 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
-from django.contrib.auth.decorators import login_required
 
 from .models import Day, EntryCategory, TimeEntry
 
@@ -20,11 +20,10 @@ def index(request):
 #         all_days_list = Day.objects.all().order_by("day_date")
 #        return all_days_list
 
+
 def overview(request):
     all_days = Day.objects.all().order_by("day_date")
-    context = {
-        "all_days_list": all_days
-    }
+    context = {"all_days_list": all_days}
     return render(request, "zeitplan/overview.html", context)
 
 
