@@ -2,10 +2,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 from .models import Day, EntryCategory, TimeEntry
 
 
+@login_required
 def index(request):
     return render(request, "zeitplan/index.html")
 
