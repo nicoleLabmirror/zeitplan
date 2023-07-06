@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
 {% if all_days_list %}
     <ul>
         <h1>{{ "Übersicht über alle Tage" }}</h1>
@@ -18,3 +21,4 @@
 <br>
 <a href="{% url 'zeitplan:index' %}">{{ "Zurück zum Start." }}</a>
 </ul>
+{% endblock %}
