@@ -7,7 +7,6 @@ from django.views import generic
 from .models import Day, EntryCategory, TimeEntry
 
 
-
 def index(request):
     return render(request, "zeitplan/index.html")
 
@@ -20,11 +19,13 @@ def index(request):
 #         all_days_list = Day.objects.all().order_by("day_date")
 #        return all_days_list
 
+
 @login_required
 def overview(request):
     all_days = Day.objects.all().order_by("day_date")
     context = {"all_days_list": all_days}
     return render(request, "zeitplan/overview.html", context)
+
 
 @login_required
 def get_time_entry_list(day_id):
@@ -36,15 +37,18 @@ def get_time_entry_list(day_id):
     }
     return context
 
+
 @login_required
 def day_overview(request, day_id):
     context = get_time_entry_list(day_id)
     return render(request, "zeitplan/day_overview.html", context)
 
+
 @login_required
 def day_edit(request, day_id):
     context = get_time_entry_list(day_id)
     return render(request, "zeitplan/day_editing.html", context)
+
 
 @login_required
 def day_editing(request, day_id):
@@ -80,6 +84,7 @@ def day_editing(request, day_id):
             reverse("zeitplan:day_edit", args=(Day.objects.get(pk=day_id).id,))
         )
 
+
 @login_required
 def category_add(request, entry_id):
     entry = TimeEntry.objects.get(pk=entry_id)
@@ -88,6 +93,7 @@ def category_add(request, entry_id):
     entry.entry_category = new_category
     entry.save()
     return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(entry.day.id,)))
+
 
 @login_required
 def add_time_frame(request, entry_id):
@@ -103,9 +109,11 @@ def add_time_frame(request, entry_id):
     entry.save()
     return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(entry.day.id,)))
 
+
 @login_required
 def day_new(request):
     return render(request, "zeitplan/day_new.html")
+
 
 @login_required
 def day_add_new(request):
@@ -113,11 +121,13 @@ def day_add_new(request):
     new_day.save()
     return HttpResponseRedirect(reverse("zeitplan:overview"))
 
+
 @login_required
 def day_delete(request, day_id):
     day_deleting = Day.objects.get(pk=day_id)
     day_deleting.delete()
     return HttpResponseRedirect(reverse("zeitplan:overview"))
+
 
 @login_required
 def time_entry_add(request, day_id):
