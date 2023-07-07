@@ -27,7 +27,6 @@ def overview(request):
     return render(request, "zeitplan/overview.html", context)
 
 
-@login_required
 def get_time_entry_list(day_id):
     day = Day.objects.get(pk=day_id)
     time_entry_list = day.timeentry_set.all().order_by("start_of_entry")
