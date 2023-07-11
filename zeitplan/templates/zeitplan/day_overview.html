@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
 <form action="{% url 'zeitplan:day_delete' day.id %}" method="post">
     {% csrf_token %}
     <ul>
@@ -36,5 +38,5 @@
 <br>
 <a href="{% url 'zeitplan:overview' %}">{{ "Zurück zur Übersicht aller Tage." }}</a>
 <br>
-<a href="{% url 'zeitplan:index' %}">{{ "Zurück zum Start." }}</a>
 </ul>
+{% endblock %}

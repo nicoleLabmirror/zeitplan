@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
 <form action="{% url 'zeitplan:day_add_new' %}" method="post">
     {% csrf_token %}
     <ul>
@@ -14,3 +16,4 @@
 </form>
 <a href="{% url 'zeitplan:overview' %}">{{ "Zurück zur Übersicht aller Tage." }}</a>
 </ul>
+{% endblock %}
