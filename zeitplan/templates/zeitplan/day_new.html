@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="{% url 'zeitplan:day_add_new' %}" method="post">
-    {% csrf_token %}
-    <ul>
-        <h1>{{ "Lege einen neuen Tag an" }}</h1>
-        <li>{{ "Datum eingeben" }}</li>
-        <br>
-        <input type="date"
-               name="new_day"
-               id="new_day{{ forloop.counter }}"
-               value="{ new_day }}">
-        <input type="submit" value="Tag anlegen/speichern">
-        <br>
-    </br>
-</form>
-<a href="{% url 'zeitplan:overview' %}">{{ "Zurück zur Übersicht aller Tage." }}</a>
+    <form action="{% url 'zeitplan:day_add_new' %}" method="post">
+        {% csrf_token %}
+        <ul>
+            <h1>{{ "Lege einen neuen Tag an" }}</h1>
+            <li>{{ "Datum eingeben" }}</li>
+            <br>
+            <input type="date"
+                   name="new_day"
+                   id="new_day{{ forloop.counter }}"
+                   value="{ new_day }}">
+            <input type="submit" value="Tag anlegen/speichern">
+            <br>
+        </br>
+    </form>
+    <a href="{% url 'zeitplan:overview' %}">{{ "Zurück zur Übersicht aller Tage." }}</a>
 </ul>
 {% endblock %}
