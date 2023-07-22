@@ -1,10 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from .helper_functions import get_german_day_name
 
 
 class Day(models.Model):
     day_date = models.DateField(null=True, default=None)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
 
     @property
     def day_name(self):
@@ -38,6 +45,12 @@ class TimeEntry(models.Model):
     votes = models.IntegerField(default=0)
     start_of_entry = models.DateTimeField(null=True, default=None)
     end_of_entry = models.DateTimeField(null=True, default=None)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
 
     @property
     def entry_status(self):
