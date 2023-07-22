@@ -2,13 +2,24 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.views import generic
+
+# from django.views import generic
 
 from .models import Day, EntryCategory, TimeEntry
 
 
 def index(request):
     return render(request, "zeitplan/index.html")
+
+
+def get_time_entry_list(day_id):
+    day = Day.objects.get(pk=day_id)
+    time_entry_list = day.timeentry_set.all().order_by("start_of_entry")
+    context = {
+        "day": day,
+        "time_entry_list": time_entry_list,
+    }
+    return context
 
 
 # class OverviewView(generic.ListView):
@@ -25,16 +36,6 @@ def overview(request):
     all_days = Day.objects.all().order_by("day_date")
     context = {"all_days_list": all_days}
     return render(request, "zeitplan/overview.html", context)
-
-
-def get_time_entry_list(day_id):
-    day = Day.objects.get(pk=day_id)
-    time_entry_list = day.timeentry_set.all().order_by("start_of_entry")
-    context = {
-        "day": day,
-        "time_entry_list": time_entry_list,
-    }
-    return context
 
 
 @login_required
