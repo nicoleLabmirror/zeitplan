@@ -117,7 +117,7 @@ def day_new(request):
 
 @login_required
 def day_add_new(request):
-    new_day = Day(day_date=request.POST["new_day"])
+    new_day = Day(day_date=request.POST["new_day"], user=request.user)
     new_day.save()
     return HttpResponseRedirect(reverse("zeitplan:overview"))
 
@@ -132,7 +132,7 @@ def day_delete(request, day_id):
 @login_required
 def time_entry_add(request, day_id):
     new_entry = Day.objects.get(pk=day_id).timeentry_set.create(
-        entry_text=request.POST["entry_add"]
+        entry_text=request.POST["entry_add"], user=request.user
     )
     new_entry.save()
     return HttpResponseRedirect(reverse("zeitplan:day_edit", args=(new_entry.day.id,)))
