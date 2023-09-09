@@ -1,3 +1,5 @@
+{% load static %}
+
 <html>
     <head>
         <title>Zeitplan App</title>
@@ -6,6 +8,7 @@
         {% bootstrap_javascript %}
     </head>
     <body>
+        <link rel="stylesheet" href="{% static 'zeitplan/style.css' %}">
         {% block content %}{% endblock %}
         {% if not user.is_authenticated %}
             <a href="{% url 'login' %}">{{ "Login!" }}</a>
