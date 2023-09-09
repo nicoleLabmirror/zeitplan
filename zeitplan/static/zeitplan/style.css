@@ -1,9 +1,16 @@
 h1 {
     color: #C25100;
+    font-family: "Courier New";
 }
 
 li {
     color: green;
+    font-family: "Courier New";
+}
+
+p, td {
+    color: darkblue;
+    font-family: "Courier New";
 }
 
 body {
