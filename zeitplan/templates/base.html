@@ -1,11 +1,11 @@
 {% load static %}
-
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load django_htmx %}
 <html>
     <head>
         <title>Zeitplan App</title>
-        {% load django_bootstrap5 %}
-        {% bootstrap_css %}
-        {% bootstrap_javascript %}
     </head>
     <body>
         <link rel="stylesheet" href="{% static 'zeitplan/style.css' %}">
